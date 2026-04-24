@@ -1,0 +1,10 @@
+{
+  "name": "evernote-exporter",
+  "version": "0.1.0",
+  "description": "Export Evernote data to a portable neutral format for migration to any notes system",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"No tests yet\""
+  },
+  "license": "MIT"
+}
