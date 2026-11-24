@@ -1,60 +1,57 @@
-# From Evernote to your archive, iPhone, and back
+# Walkthrough: read, back up, and move saved notes
 
-## 1. Make the source export
+Start with [START HERE](../START%20HERE.md). Use existing exports only. If you have no ENEX files, stop: opening Evernote or exporting has not been verified to preserve last-viewed dates. See the [evidence and boundary](source-safety.md).
 
-In Evernote for Windows or Mac, right-click a notebook, choose **Export**, and choose **ENEX**. Include tags, dates and other note attributes. Export one notebook at a time when preserving groups matters. If Evernote splits a large notebook into several files, add each part and give each the same notebook label; this app stores the parts separately.
+## Start on Windows
 
-Keep these original exports somewhere safe. This app does not sign into Evernote or check whether you exported every notebook. Evernote Web and iPhone do not supply the desktop notebook-export workflow. See [Evernote's export instructions](https://help.evernote.com/hc/en-us/articles/209005557-Export-Notes-and-Notebooks-as-ENEX-or-HTML).
+Download the ZIP from the [release page](https://github.com/mkant18/evernote-exporter/releases/tag/v0.2.1), extract all files, and install [Node.js 22 or later](https://nodejs.org/en/download). Double-click **Start Evernote Archive.cmd**. First launch downloads pinned dependencies; later launches can run without internet. No Evernote login is requested. The app requires no administrator rights.
 
-## 2. Start the app on your PC
+Keep the extracted folder: your library lives in `archives/app` inside it. Closing the browser leaves the app running. The launcher shows its process ID and stop command. Reopening it reuses that session; restarting the PC stops it. For a visible terminal, run `npm start` and stop with Ctrl+C.
 
-Install Node.js 22 or later if it is not already installed. Double-click **Start Evernote Archive.cmd**. The first launch installs the locked dependencies; later launches work without internet. A browser opens with your private connection link.
+## Practise with invented notes
 
-The app runs in the background and keeps your notebooks in `archives/app` beside the application. Closing the browser does not stop the app. The launcher prints its process ID and stop command. Reopening the launcher reuses a running session. Stop that process or restart the PC to end the session; your stored library remains.
+Choose **Add notebooks → Choose ENEX files**, select `examples/sample.enex` from the release (or `tests/fixtures/sample.enex` in the source checkout), enter notebook **Practice** and stack **Family**, then choose **Add to archive**. Expect two notes, including **Travel / plans: café 🧭**. Open that note, search for text, try a tag, and download its text attachment. The fixture deliberately contains conversion notices to show where limitations appear.
 
-For a visible terminal instead: `npm start`. Press Ctrl+C in that terminal to stop.
+Choose **Take this notebook** and try **Portable reader**, **Markdown + attachments**, **Evernote ENEX**, and **Complete archive**. These buttons download copies; none imports into Evernote. The ENEX download should be byte-identical to the input. Keep this practice app folder separate from your real library if you want counts without sample notes.
 
-## 3. Import and check
+## Add your existing exports
 
-Choose **Add notebooks**, select or drop ENEX files, review each notebook name, and optionally enter a stack. Names are your assignments, not recovered Evernote metadata. Select **Add to archive**. Files are converted sequentially; failed files stay in the queue with an explanation and can be retried. Completed notebooks remain available even if another file fails.
+Keep two copies of the original files, one on a separate backup drive. Add all parts of each notebook, including numbered parts. Each input must be at most 512 MiB. For larger existing files, stop and ask for help; do not reopen Evernote to re-export under this constraint. The optional CLI can process larger files subject to documented per-note memory limits.
 
-Open a notebook, search its text or choose a tag, then select a note. Check representative notes, dates, checklists and attachments. Expand **About this archive** and note-level conversion notices. An archive that verifies successfully can still contain unsupported features or cover only part of your account.
+Review notebook names and optional stack names before importing. These are your assignments, not recovered Evernote organization. One file's label applies to every note in it. Split files remain separate archive entries with the same label. Imports run sequentially. A failed file stays in the queue for retry; completed files remain saved. Keep a list of filenames, notebook/stack names, note counts, and failures outside the app.
 
-The reader does not edit notes or fetch remote note images. Attachments are downloaded on request; supported local images are previewed. Encrypted content remains encrypted. Structured Tasks and other unsupported metadata remain in the original/source records.
+Compare counts against any existing inventory. Check representative notes, tags, dates, tables, checklists, images, and attachments. Expand **About this archive** and note-level conversion notices. Importing all supplied files successfully does not prove that all Evernote content was captured. Empty notebooks, shared material, Trash, history, tag hierarchy, Tasks, reminders, OCR, encrypted content and unresolved note links need explicit accounting. Do not revisit Evernote to check these until a compliant acquisition method is established.
 
-## 4. Read on your iPhone
+The reader does not fetch remote images. Note links are inactive in the app and portable HTML. Downloaded attachments and links in Markdown/destination apps may contact external services. Use offline viewers when needed. Encrypted content remains encrypted.
 
-Double-click **Start on iPhone.cmd** on the PC. This starts a separate private-network session on port 4319. In the app, select **Use on iPhone** and copy the private link into Safari on your iPhone. Both devices must be on the same trusted Wi-Fi, and the PC must stay awake and running.
+## Save a backup
 
-If Windows asks whether Node.js may receive connections, allow only the private network you intend to use. The app does not change firewall rules automatically. If the page cannot connect, check that the phone is on Wi-Fi rather than cellular, the PC has not slept, and the router does not isolate wireless clients. VPNs may affect reachability. Local sharing uses HTTP, not encrypted HTTPS, so do not use a public/shared network for private notes.
+For each imported file choose **Take this notebook → Complete archive**. Save the ZIP plus original ENEX to your backup drive. The archive ZIP holds notes, exact attachments, checksums, organization labels and original source. Markdown is a more limited migration copy. Portable HTML allows offline reading, with a 32 MiB output limit; use the app or complete archive for larger notebooks.
 
-Anyone who has the private link and can reach the PC can access this library. The key is in the link fragment; it is removed from the browser address after connection and held in that tab's session storage. A new app process normally generates a new key. Use the current launcher link if an older one stops working. No notebooks are published to the internet by this app.
+For a whole-library backup, stop every archive app session and copy `archives/app`. Restore it to the same relative location in a fresh app folder before launching. To use a complete archive ZIP instead, extract it to a new directory, verify it with `node src/cli.js verify --archive "PATH"`, then add `sources/original.enex` through the app and re-enter labels from `manifest.json`. Never overwrite your only copy.
 
-The layout supports a narrow screen: choose a notebook, tap a note, and use **Back to notes** to return to the list. You may use Safari's Add to Home Screen as a shortcut, but this is not an installed offline native app or service-worker PWA.
+## Try another notes app
 
-## 5. Take a copy elsewhere
+[Joplin](https://joplinapp.org/) is one option with an official ENEX importer. You can test local import without connecting it to Evernote or configuring sync.
 
-Select **Take this notebook**:
+1. Install Joplin's desktop app and use a fresh local profile/library for the trial. Start with the invented sample or a copy of one existing notebook export.
+2. Choose **File → Import → ENEX** and select the copied file. Joplin creates a new notebook. Choose its HTML import option if preserving rich formatting matters more than Markdown editing.
+3. Check note count, tags, titles, dates, attachments, tables, checklists, and internal links. Formatting and OCR behavior can differ; note links may be guessed by title or remain Evernote links. Do not click remaining Evernote links under the no-changes requirement.
+4. If acceptable, import the remaining copied ENEX files. Track split notebook parts and recreate stack organization in Joplin as needed. Keep original ENEX and archive backups even after migration.
+5. Set up destination-only mobile sync separately if desired. Do not delete or reorganize the original Evernote account.
 
-| Download | Use |
-| --- | --- |
-| Portable reader | A self-contained HTML reading copy with safe markup and embedded attachments. Open in a browser; file-opening/download behavior on iPhone still depends on Safari/Files. No app server is needed once the file is available in a capable viewer. Maximum output 32 MiB. |
-| Markdown | ZIP containing Markdown notes, safe relative attachment paths, the original ENEX, and an archive manifest. Extract the entire ZIP; keep `notes` and `assets` together. Rich styles and structured Tasks are not fully represented in Markdown. |
-| Evernote ENEX | Exact original export bytes for restoring through Evernote. No custom JSON conversion is needed. |
-| Complete archive | ZIP containing JSON notes, attachments, integrity manifest and original source. This is the full portable backup, not a file Evernote directly imports. |
+These steps follow [Joplin's import documentation](https://joplinapp.org/help/apps/import_export/); this release has not been tested against a live Joplin installation or your mother's account. Migration acceptance requires inspecting the copied data. Importing back into the source Evernote account would change it and is excluded.
 
-For a library backup, stop the app and copy the entire `archives/app` directory, or save a complete archive ZIP for each imported file. Keep backups outside the project folder and verify copies. To restore this application's library on another PC, install the app and copy the saved `archives/app` directory into the same relative location before starting it. A complete archive ZIP can instead be extracted, verified with the CLI, and its `sources/original.enex` re-imported through the app; re-enter notebook/stack labels from the manifest.
+## Read on your iPhone
 
-## 6. Return the notes to Evernote
+Double-click **Start on iPhone.cmd** on the PC, then choose **Use on iPhone** in the app. Open its private link in Safari. Both devices must be on the same trusted Wi-Fi, and the PC must remain awake. This is a local archive link, not the Evernote iPhone app.
 
-Download **Evernote ENEX**. In Evernote for Windows or Mac, choose **File → Import** and select the ENEX file. Inspect the imported notes, attachments and checklists, arrange notebook/stack organization if needed, allow Evernote to sync, then open Evernote on your iPhone and check the same examples.
+If Windows requests network access, allow only the private network you intend to use. The app does not change firewall rules. If connection fails, check Wi-Fi, PC sleep, VPNs, and router client isolation. Sharing uses HTTP and a private key; anyone with the link and network access can read the library. Do not use public/shared Wi-Fi or publish the link. A new process normally generates a new key.
 
-This restores the original exported notes. It does not write the archive app's assigned notebook/stack labels back into ENEX. Importing can create duplicate notes if the originals are already in the target account, so use a clearly separated import notebook and review before reorganizing anything. No original notes are deleted by this app.
-
-Evernote's [import instructions](https://help.evernote.com/hc/en-us/articles/360035153274-How-To-Import-Notes-and-Notebooks) document the desktop route. That page also includes Web instructions alongside an inconsistent desktop-only statement; this guide uses the explicit desktop path. The app does not certify Web import or live account synchronization. Its custom JSON archive is not an Evernote import format.
+Choose a notebook, tap a note, then use **Back to notes**. Safari's Add to Home Screen can save a shortcut; this is not an offline native app. Physical iPhone acceptance remains unverified.
 
 ## If something fails
 
-An invalid ENEX or failed conversion does not modify your input. Retry with a fresh export or a smaller file, and retain the originals. If a notebook is reported unreadable, keep its files and use CLI verification before relying on it. Do not manually edit the manifest to silence a checksum error.
+Keep the input files. Retry a failed import with the same existing file after reading the error. Preserve unreadable archive directories and run CLI verification; do not edit checksums to hide failures. Launcher logs and private links are in `.runtime`; do not share that directory. If Node.js is missing, install it and reopen the launcher. If installation fails, check connectivity and retain the error message.
 
-Launcher logs and private session links are in `.runtime`; do not share that directory. Conversion/test artifacts are in `.evidence` and are not part of the library. Real account/device acceptance is separate from the synthetic fixtures used during development.
+To upgrade, stop sessions and back up `archives/app`, extract the new release into a different folder, copy the backed-up library into it, then launch. Keep the old folder until the new one has been checked.

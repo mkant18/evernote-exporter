@@ -71,7 +71,8 @@ test('reading HTML escapes hostile text and strips active tags, attributes and U
   }
   assert.match(body, /&lt;img src=x onerror=&quot;textAttack\(\)&quot;&gt;/);
   assert.match(body, /Unsafe link/);
-  assert.match(body, /href="https:\/\/example\.com\/\?a=1&amp;b=2"/);
+  assert.match(body, /Link kept inactive: https:\/\/example\.com\/\?a=1&amp;b=2/);
+  assert.doesNotMatch(body, /href="(?:https?:|evernote:|mailto:)/i);
   assert.match(body, /aria-label="Checked"/);
   assert.match(body, /aria-label="Unchecked"/);
   const html = portableHtml(output, loaded);
@@ -95,6 +96,20 @@ test('Markdown retains legacy and nested checklist semantics and ordered list nu
   assert.match(markdown, /^2\. Second numbered$/m);
   assert.doesNotMatch(markdown, /\]\(<?javascript:/i);
   assert.match(markdown, /\\<img src=x/);
+});
+
+test('reading HTML leaves every source link inactive, including Evernote and redirects', () => {
+  const urls = ['https://www.evernote.com/shard/s1/note/id', 'evernote:///view/1/note/id', 'https://example.com/redirect', 'mailto:person@example.com', 'javascript:alert(1)'];
+  for (const href of urls) {
+    const node = { type: 'element', name: 'a', attributes: { href }, children: [{ type: 'text', text: 'Original link' }] };
+    const html = renderHtml(node, { attachments: [] }, () => { throw new Error('Unexpected attachment'); });
+    const tags = htmlTags(html);
+    assert.equal(tags.length, 1);
+    assert.equal(tags[0].name, 'span');
+    assert.equal(tags[0].attributes.title, `Link kept inactive: ${href}`);
+    assert.equal(tags[0].attributes.href, undefined);
+    assert.ok(html.endsWith('Original link</span>'));
+  }
 });
 
 test('archive ZIP independently extracts every original payload and exact source bytes', async (t) => {

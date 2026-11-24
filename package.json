@@ -1,6 +1,6 @@
 {
   "name": "evernote-exporter",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Export Evernote data to a portable neutral format for migration to any notes system",
   "main": "src/index.js",
   "bin": {
@@ -13,9 +13,20 @@
     "test": "node --test",
     "start": "node src/web/server.js",
     "start:phone": "node src/web/server.js --share",
-    "cli": "node src/cli.js"
+    "cli": "node src/cli.js",
+    "package": "node scripts/build-release.js"
   },
-  "files": ["src", "scripts", "Start Evernote Archive.cmd", "Start on iPhone.cmd", "README.md", "docs/user-guide.md", "docs/archive-format.md"],
+  "files": [
+    "src",
+    "scripts",
+    "Start Evernote Archive.cmd",
+    "Start on iPhone.cmd",
+    "README.md",
+    "docs/user-guide.md",
+    "docs/archive-format.md",
+    "START HERE.md",
+    "docs/source-safety.md"
+  ],
   "license": "MIT",
   "dependencies": {
     "entities": "6.0.1",

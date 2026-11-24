@@ -270,11 +270,8 @@ function renderNode(node, context) {
   let container;
   if (node.type === 'document') container = document.createDocumentFragment();
   else if (node.name === 'a') {
-    let safeUrl;
-    try { const url = new URL(node.attributes?.href); if (['http:', 'https:'].includes(url.protocol)) safeUrl = url.href; } catch { /* Unsupported links remain readable text. */ }
-    container = element(safeUrl ? 'a' : 'span');
-    if (safeUrl) { container.href = safeUrl; container.target = '_blank'; container.rel = 'noopener noreferrer'; }
-    else if (node.attributes?.href?.startsWith('evernote:')) container.title = 'Original Evernote link; destination is not resolved in this archive';
+    container = element('span');
+    container.title = `Link kept inactive to avoid contacting the source: ${node.attributes?.href || ''}`;
   } else if (node.name === 'img') return element('span', '[Remote image not downloaded]', 'muted');
   else container = element(safeElements.has(node.name) ? node.name : 'span');
   for (const child of node.children || []) container.append(renderNode(child, context));
