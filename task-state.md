@@ -13,7 +13,7 @@ Verified outcomes:
 
 Evidence: docs/release-0.2.1-verification.md; docs/source-safety.md; .evidence/release-021-{tests.txt,fresh-tests.txt,package-check.json,launcher-journey.json}. ZIP: dist/Evernote-Archive-0.2.1-Windows.zip (SHA-256 11b18d0666f504968fa905e2bcab784d3c5d0548d7e421cdde953d0d859c7d29).
 
-Next action: commit only release-related files, push master without force, create GitHub v0.2.1 release with ZIP/checksum, download published assets and compare bytes. GitHub connector has no release-asset publishing capability; use authenticated gh CLI. Network needs sandbox escalation; escalated auth check succeeds.
+Publication complete: code/guide commit b249b453dcf56e91b903c5a6bd93b21809c0c24c pushed to master; GitHub release https://github.com/mkant18/evernote-exporter/releases/tag/v0.2.1 targets that commit. ZIP and checksum downloaded back from GitHub and match local bytes exactly. Receipt: .evidence/release-021-published-check.json. Next action: establish an existing-copy or verified zero-change acquisition route; do not access the account meanwhile.
 
 Remaining goal gap: no existing export is known and live acquisition preserving all access metadata is not established. Do not claim a complete migration or mark the overall goal complete. Need existing copies or a verified acquisition route covering exact current client/API and both note and notebook last-viewed metadata. Physical iPhone, current Joplin and full-library acceptance remain unobserved.
 

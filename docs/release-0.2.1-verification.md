@@ -15,3 +15,5 @@ Release asset: `dist/Evernote-Archive-0.2.1-Windows.zip`.
 SHA-256: `11b18d0666f504968fa905e2bcab784d3c5d0548d7e421cdde953d0d859c7d29`.
 
 Not established: zero-change live Evernote export (including last-viewed dates), complete account capture, physical iPhone acceptance, live Joplin import, or representative large-library acceptance. The release requires Node.js 22+ and first-run internet for dependency installation. Prior 0.2.0 browser acceptance is historical evidence, not a fresh test of these changes.
+
+Published as [v0.2.1](https://github.com/mkant18/evernote-exporter/releases/tag/v0.2.1), targeting code commit `b249b453dcf56e91b903c5a6bd93b21809c0c24c`. Both release assets were downloaded back from GitHub and matched local bytes exactly; receipt `.evidence/release-021-published-check.json`.
