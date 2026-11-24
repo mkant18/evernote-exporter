@@ -246,7 +246,7 @@ function renderNode(node, context) {
   }
   if (node.type === 'encrypted') {
     const box = element('div', undefined, 'encrypted-placeholder');
-    box.append(element('strong', 'Encrypted content preserved'), element('span', 'Open the original note in Evernote to unlock this content.'));
+    box.append(element('strong', 'Encrypted content preserved'), element('span', 'This reader cannot decrypt it. Keep the original export. Do not open the source note under the no-changes requirement.'));
     return box;
   }
   if (node.type === 'attachment') {

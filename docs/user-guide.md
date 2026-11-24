@@ -4,7 +4,7 @@ Start with [START HERE](../START%20HERE.md). Use existing ENEX files or the [Win
 
 ## Start on Windows
 
-Download the ZIP from the [release page](https://github.com/mkant18/evernote-exporter/releases/tag/v0.3.0), extract all files, and install [Node.js 22.13 or later](https://nodejs.org/en/download). Double-click **Start Evernote Archive.cmd**. First launch downloads pinned dependencies; later launches can run without internet. No Evernote login is requested. The app requires no administrator rights.
+Download the ZIP from the [release page](https://github.com/mkant18/evernote-exporter/releases/tag/v0.3.1), extract all files, open **START HERE.html** for the offline walkthrough, and install [Node.js 22.13 or later](https://nodejs.org/en/download). Double-click **Start Evernote Archive.cmd**. First launch downloads pinned dependencies; later launches can run without internet. No Evernote login is requested. The app requires no administrator rights.
 
 Keep the extracted folder: your library lives in `archives/app` inside it. Closing the browser leaves the app running. The launcher shows its process ID and stop command. Reopening it reuses that session; restarting the PC stops it. For a visible terminal, run `npm start` and stop with Ctrl+C.
 

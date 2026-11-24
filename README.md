@@ -4,7 +4,7 @@ Windows-first archive app for your Evernote exports. Import notebooks, search an
 
 ## Start here
 
-Download the [Windows release ZIP](https://github.com/mkant18/evernote-exporter/releases/tag/v0.3.0) and follow [START HERE](START%20HERE.md) or the [walkthrough](docs/user-guide.md). Requires Node.js 22.13 or later.
+Download the [Windows release ZIP](https://github.com/mkant18/evernote-exporter/releases/tag/v0.3.1), extract it, and double-click **START HERE.html** for the offline walkthrough. The [text guide](START%20HERE.md) is also available here. Requires Node.js 22.13 or later.
 
 **Source preservation:** process existing ENEX, or use the new [Windows snapshot backup and offline conversion](docs/windows-backup.md). Neither path opens Evernote or calls its API. The backup route is a preview: native VSS creation and compatibility with a real current installation remain unverified. Conversion reports missing/unsupported content and never certifies full account coverage. Do not open the source client to export, fill gaps, or restore data under the absolute no-changes requirement.
 

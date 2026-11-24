@@ -21,7 +21,7 @@ async function main() {
       for (const name of fs.readdirSync(full).sort()) include(`${relative}/${name}`);
     } else if (stat.isFile() && !relative.endsWith('/.gitkeep')) files.push({ full, name: relative });
   }
-  for (const item of ['src', 'scripts', 'tests', 'Start Evernote Archive.cmd', 'Start on iPhone.cmd', 'Backup Windows Evernote.cmd', 'Export Windows Backup.cmd', 'package.json', 'package-lock.json', 'README.md', 'START HERE.md', 'docs/user-guide.md', 'docs/windows-backup.md', 'docs/source-safety.md', 'docs/archive-format.md']) include(item);
+  for (const item of ['src', 'scripts', 'tests', 'Start Evernote Archive.cmd', 'Start on iPhone.cmd', 'Backup Windows Evernote.cmd', 'Export Windows Backup.cmd', 'package.json', 'package-lock.json', 'README.md', 'START HERE.md', 'START HERE.html', 'docs/user-guide.md', 'docs/windows-backup.md', 'docs/source-safety.md', 'docs/archive-format.md']) include(item);
   files.push({ full: path.join(root, 'tests/fixtures/sample.enex'), name: 'examples/sample.enex' });
   const zip = new yazl.ZipFile();
   zip.on('error', (error) => zip.outputStream.destroy(error));

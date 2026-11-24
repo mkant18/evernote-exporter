@@ -2,7 +2,7 @@
 
 **Keep Evernote as it is:** this app never signs in to it. Already have ENEX files? Use the steps below. No exports yet? Use the [Windows backup walkthrough](docs/windows-backup.md): it copies the local cache without opening Evernote, then exports from that copy. This new route is a preview: native snapshot creation and full-account coverage still need validation on the target PC. Do not use Evernote's own export screen under the strict no-changes requirement.
 
-1. Download **Evernote-Archive-0.3.0-Windows.zip** from the [GitHub release](https://github.com/mkant18/evernote-exporter/releases/tag/v0.3.0). Right-click it and choose **Extract All**. Keep the extracted folder somewhere permanent on your Windows PC.
+1. Download **Evernote-Archive-0.3.1-Windows.zip** from the [GitHub release](https://github.com/mkant18/evernote-exporter/releases/tag/v0.3.1). Right-click it and choose **Extract All**. Keep the extracted folder somewhere permanent on your Windows PC. Double-click **START HERE.html** for the offline walkthrough, or continue below.
 2. Install [Node.js](https://nodejs.org/en/download) version 22.13 or later if needed. Choose the Windows installer. This is a one-time prerequisite; the ZIP does not contain Node.js.
 3. In the extracted folder, double-click **Start Evernote Archive.cmd**. The first run needs internet to install its locked dependencies. Your browser opens the archive; your notes stay on the PC.
 4. Choose **Add notebooks → Choose ENEX files**. Select your existing `.enex` files. Give each file its notebook name, then choose **Add to archive**. To practise first, use the included `examples/sample.enex`, which contains only invented notes.

@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; base-uri 'none'; form-action 'none'">
+<title>Evernote Archive: start here</title>
+<style>
+  :root { color-scheme: light; font-family: system-ui, sans-serif; color: #172c22; background: #f7f7f1; line-height: 1.65; }
+  body { margin: 0; }
+  main { max-width: 48rem; margin: auto; padding: 2.5rem 1.25rem 4rem; }
+  h1, h2, h3 { line-height: 1.2; }
+  h1 { font-size: clamp(2rem, 5vw, 3rem); letter-spacing: -.03em; max-width: 17ch; }
+  h2 { font-size: 1.5rem; margin-top: 0; }
+  h3 { font-size: 1.15rem; }
+  a { color: #165a3a; text-underline-offset: .2em; }
+  a:focus-visible, summary:focus-visible { outline: 3px solid #a34b0b; outline-offset: 4px; }
+  code { font: .94em ui-monospace, monospace; overflow-wrap: anywhere; }
+  nav { display: flex; flex-wrap: wrap; gap: .3rem 1.2rem; margin: 1.5rem 0 2rem; }
+  nav a { padding: .3rem 0; }
+  section { border-top: 1px solid #ccd3c9; margin-top: 2rem; padding-top: 1.8rem; scroll-margin-top: 1rem; }
+  li { padding-left: .3rem; margin: .7rem 0; }
+  .notice { background: #fff5de; border-left: 4px solid #93631a; padding: .8rem 1rem; }
+  .expected { padding: .75rem 1rem; background: #e8eee2; }
+  .label { font-size: .85rem; letter-spacing: .05em; text-transform: uppercase; }
+  details { margin: 1rem 0; padding: .8rem 1rem; background: #fff; border: 1px solid #ccd3c9; }
+  summary { cursor: pointer; font-weight: 650; }
+  footer { font-size: .9rem; margin-top: 2.5rem; }
+  @media print { :root { background: white; color: black; } main { max-width: none; padding: 0; } nav { display: none; } section { break-inside: avoid; } a { color: black; } }
+</style>
+</head>
+<body>
+<main>
+<header>
+  <p class="label">Evernote Archive · Windows guide</p>
+  <h1>Make a private copy of your notes</h1>
+  <p>Use the copy to read your notes, save a backup, or try another notes app.</p>
+  <p class="notice"><strong>Do not open Evernote for these steps.</strong> This tool works from copied files. Never import or restore the copy into your original Evernote account.</p>
+  <p>The Windows backup route is a preview. A helper must check its report before you rely on the result. It cannot promise that everything in your account is stored on either computer.</p>
+</header>
+<nav aria-label="Walkthrough steps">
+  <a href="#prepare">1. Get ready</a><a href="#backup">2. Copy the Windows data</a><a href="#read">3. Read and check</a><a href="#devices">Other devices</a><a href="#move">Try another app</a>
+</nav>
+
+<section id="prepare" aria-labelledby="prepare-heading">
+  <h2 id="prepare-heading">1. Get ready on Windows</h2>
+  <ol>
+    <li>Download the Windows ZIP from the <a href="https://github.com/mkant18/evernote-exporter/releases">GitHub release page</a>. Right-click the ZIP and choose <strong>Extract All</strong>.</li>
+    <li>Install <a href="https://nodejs.org/en/download">Node.js for Windows</a>, version 22.13 or later. Ask your helper to do this one-time setup if needed.</li>
+    <li>In the extracted folder, double-click <strong>Start Evernote Archive.cmd</strong>. The first run downloads the app's required libraries. Your browser opens <strong>Evernote Archive</strong>.</li>
+    <li>Plug in a private USB backup drive. It must have a different drive letter from the drive containing the Evernote data.</li>
+  </ol>
+  <p>Keep the extracted app folder. Your readable library is saved inside it. Use a private drive with enough free space for several copies of the notes and attachments.</p>
+  <p class="expected">You are ready when the archive opens in your browser. It does not ask for an Evernote password.</p>
+  <p>After this setup, copying and exporting need no internet. Do not open, close, sign into, or sync Evernote to prepare it.</p>
+</section>
+
+<section id="backup" aria-labelledby="backup-heading">
+  <h2 id="backup-heading">2. Copy the Windows data</h2>
+  <p>If you already have <code>.enex</code> export files, skip to step 3. Otherwise, have your helper do these steps with you.</p>
+  <h3>Make the backup</h3>
+  <ol>
+    <li>Right-click <strong>Backup Windows Evernote.cmd</strong>. Choose <strong>Run as administrator</strong>.</li>
+    <li>Enter a new folder on your private backup drive, such as <code>E:\Evernote-PC1-backup</code>. Use your actual drive letter.</li>
+    <li>Check the source Windows user and the destination shown in the window. Type <strong>BACKUP</strong> only when both are correct.</li>
+    <li>Wait for <strong>Backup verified</strong>. Keep the backup folder private and unchanged.</li>
+  </ol>
+  <p>If you use another administrator's password, the helper may find that administrator's Evernote folder. Stop if the displayed Windows user is wrong.</p>
+  <h3>Make export files from the backup</h3>
+  <ol>
+    <li>Double-click <strong>Export Windows Backup.cmd</strong> normally.</li>
+    <li>Enter the backup folder from the previous step.</li>
+    <li>Enter a different new folder for the exports, such as <code>E:\Evernote-PC1-export</code>.</li>
+    <li>Open <strong>READ ME.txt</strong> in the result. Have your helper review <strong>export-report.json</strong>.</li>
+  </ol>
+  <p class="expected">The <strong>enex</strong> folder holds the readable export files. <strong>original-backup</strong> keeps the complete copied input.</p>
+  <p>Repeat on the second Windows computer using different folder names. Keep both backups separate. Do not combine them or discard a copy until your helper compares the results.</p>
+  <details><summary>If the tool reports missing content or an error</summary>
+    <p>Keep the window open and keep all the files. Show your helper the message. Do not open Evernote to download missing notes or attachments.</p>
+    <p>The second Windows backup may contain additional material. Neither backup can prove that all cloud-only material was captured.</p>
+    <p>The <a href="docs/windows-backup.md">detailed Windows guide</a> describes supported formats and the material that remains in the raw backup.</p>
+  </details>
+</section>
+
+<section id="read" aria-labelledby="read-heading">
+  <h2 id="read-heading">3. Read and check your copy</h2>
+  <ol>
+    <li>In Evernote Archive, choose <strong>Add notebooks</strong>, then <strong>Choose ENEX files</strong>.</li>
+    <li>Select the files in your export's <strong>enex</strong> folder. Give each file the notebook name shown in the report.</li>
+    <li>Choose <strong>Add to archive</strong>. Wait for each file to finish.</li>
+    <li>Open a notebook and a note. Try search and a tag. Check some images and attachments.</li>
+    <li>For each imported file, choose <strong>Take this notebook</strong>, then <strong>Complete archive</strong>. Save the ZIP on your backup drive.</li>
+  </ol>
+  <p>To practise first, use <code>examples/sample.enex</code> from the download. It contains two invented notes. Keep this practice library separate from your real library.</p>
+  <p>Compare notebook and note counts with your helper. Review every failure and conversion notice. Reading these copies does not contact Evernote.</p>
+  <p>Links inside notes are inactive in this reader. Downloaded attachments opened in other apps can contact outside services. Use offline viewers when needed.</p>
+</section>
+
+<section id="devices" aria-labelledby="devices-heading">
+  <h2 id="devices-heading">Read on your iPhone or iPad</h2>
+  <ol>
+    <li>On the Windows PC, double-click <strong>Start on iPhone.cmd</strong>.</li>
+    <li>In the archive, choose <strong>Use on iPhone</strong>.</li>
+    <li>Connect your iPhone or iPad to the same trusted Wi-Fi as the PC.</li>
+    <li>Open the private link in Safari. Keep the PC awake while you read.</li>
+  </ol>
+  <p>The same link can open in a browser on your other Windows PC. Keep the link private. This is the archive reader, not the Evernote app.</p>
+</section>
+
+<section id="move" aria-labelledby="move-heading">
+  <h2 id="move-heading">Optional: try another notes app</h2>
+  <p><a href="https://joplinapp.org/help/install/">Joplin</a> runs on Windows, iPhone and iPad. Try a copied notebook before deciding to move.</p>
+  <ol>
+    <li>Install Joplin on one Windows PC. Use a fresh local library for the trial.</li>
+    <li>Choose <strong>File</strong>, then <strong>Import</strong>, then <strong>ENEX</strong>. Select a copied export file.</li>
+    <li>Check the notes, tags, dates, formatting and attachments. Do not follow links back to Evernote.</li>
+    <li>If you want to continue, import the remaining files on this PC. Keep your backups.</li>
+    <li>Follow <a href="https://joplinapp.org/help/apps/sync/">Joplin's sync instructions</a> to use the same new library on your other devices.</li>
+  </ol>
+  <p>Do not import every file again on each device. Let Joplin sync the library. Your original Evernote account can stay as it is.</p>
+  <p>Formatting, internal links and other features may differ. See <a href="https://joplinapp.org/help/apps/import_export/">Joplin's import limits</a>. This package has not been tested against your notes or a live Joplin installation.</p>
+</section>
+<footer>
+  <p>This guide works offline and loads no external images or scripts. External links open only when you select them.</p>
+  <p><a href="docs/user-guide.md">Detailed archive guide</a> · <a href="docs/windows-backup.md">Detailed Windows backup guide</a></p>
+</footer>
+</main>
+</body>
+</html>
