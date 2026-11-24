@@ -1,5 +1,14 @@
 # Dependencies
 node_modules/
+.npm-cache/
+.evidence/
+.runtime/
+.playwright-cli/
+.browser-cache/
+# Keep private exports outside the checkout. These are additional safeguards.
+*.enex
+!tests/fixtures/*.enex
+archives/
 
 # Build output
 dist/
