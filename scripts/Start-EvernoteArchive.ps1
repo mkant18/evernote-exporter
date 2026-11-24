@@ -14,8 +14,8 @@ $projectDirectory = Split-Path -Parent $PSScriptRoot
 Set-Location -LiteralPath $projectDirectory
 $nodePath = (Get-Command node -ErrorAction Stop).Source
 $installedNodeVersion = & $nodePath --version
-if ($LASTEXITCODE -ne 0 -or $installedNodeVersion -notmatch '^v(\d+)\.' -or [int]$Matches[1] -lt 22) { throw 'Install Node.js 22 or later, then launch again.' }
-if (-not (Test-Path -LiteralPath (Join-Path $projectDirectory 'node_modules/yazl/package.json') -PathType Leaf)) {
+if ($LASTEXITCODE -ne 0 -or $installedNodeVersion -notmatch '^v(\d+)\.(\d+)\.' -or [int]$Matches[1] -lt 22 -or ([int]$Matches[1] -eq 22 -and [int]$Matches[2] -lt 13)) { throw 'Install Node.js 22.13 or later, then launch again.' }
+if (-not (Test-Path -LiteralPath (Join-Path $projectDirectory 'node_modules/yazl/package.json') -PathType Leaf) -or -not (Test-Path -LiteralPath (Join-Path $projectDirectory 'node_modules/yjs/package.json') -PathType Leaf)) {
     Write-Host 'Installing the pinned application dependencies...'
     & npm ci --ignore-scripts --no-audit --no-fund
     if ($LASTEXITCODE -ne 0) { throw 'Dependency installation failed. Check the network connection and try again.' }

@@ -134,7 +134,7 @@ async function startServer({ dataDir = path.resolve(__dirname, '../../archives/a
       const expected = Buffer.from(key);
       if (supplied.length !== expected.length || !timingSafeEqual(supplied, expected)) return json(response, 401, { error: 'Open the private link shown by the launcher, or enter its access key.' });
       if (request.method === 'GET' && url.pathname === '/api/status') {
-        return json(response, 200, { version: '0.2.1', maxUploadBytes: MAX_UPLOAD, importing,
+        return json(response, 200, { version: require('../../package.json').version, maxUploadBytes: MAX_UPLOAD, importing,
           sharing: { enabled: share, urls: share ? lanAddresses.map((address) => `http://${address}:${activePort}/#key=${key}`) : [] } });
       }
       if (request.method === 'GET' && url.pathname === '/api/archives') {

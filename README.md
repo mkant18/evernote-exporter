@@ -1,12 +1,12 @@
 # Evernote Exporter
 
-Windows-first archive app for your Evernote exports. Import notebooks, search and read notes, download attachments, export Markdown, and retain original ENEX files for restoration. Runs locally on Node.js 22 or later, with an iPhone-friendly browser interface. No Evernote credentials or cloud upload are required.
+Windows-first archive app for your Evernote exports. Import notebooks, search and read notes, download attachments, export Markdown, and retain original ENEX files for restoration. Runs locally on Node.js 22.13 or later, with an iPhone-friendly browser interface. No Evernote credentials or cloud upload are required.
 
 ## Start here
 
-Download the [Windows release ZIP](https://github.com/mkant18/evernote-exporter/releases/tag/v0.2.1) and follow [START HERE](START%20HERE.md) or the [walkthrough](docs/user-guide.md). Requires Node.js 22 or later.
+Download the [Windows release ZIP](https://github.com/mkant18/evernote-exporter/releases/tag/v0.3.0) and follow [START HERE](START%20HERE.md) or the [walkthrough](docs/user-guide.md). Requires Node.js 22.13 or later.
 
-**Absolute no-changes requirement:** use existing ENEX files only. No live acquisition method has been verified to preserve Evernote note/notebook last-viewed dates. If there are no existing exports, stop before opening Evernote. This release is an offline archive tool, not a certified zero-change live exporter. See [source safety evidence](docs/source-safety.md). Do not import back into the original account.
+**Source preservation:** process existing ENEX, or use the new [Windows snapshot backup and offline conversion](docs/windows-backup.md). Neither path opens Evernote or calls its API. The backup route is a preview: native VSS creation and compatibility with a real current installation remain unverified. Conversion reports missing/unsupported content and never certifies full account coverage. Do not open the source client to export, fill gaps, or restore data under the absolute no-changes requirement.
 
 ## Run
 
@@ -78,4 +78,4 @@ node src/cli.js export --input tests/fixtures/sample.enex --output .evidence/dem
 node src/cli.js verify --archive .evidence/demo-new
 ```
 
-Create `.evidence` first and use a fresh output name on each run. Tests cover conversion, verification, HTTP upload/download, persistence, corrupted records, hostile content and paths, large resources, and independent ZIP reading. Python 3 is used only by the development tests for an independent standard-library ZIP/HTML reader; the app needs only Node.js. Fixtures are synthetic. Current handoff: [task-state.md](task-state.md).
+Create `.evidence` first and use a fresh output name on each run. Tests cover conversion, verification, HTTP upload/download, persistence, corrupted records, hostile content and paths, large resources, and independent ZIP reading. Python 3 is used only by the development tests for an independent standard-library ZIP/HTML reader; the app needs only Node.js. Fixtures are synthetic. Backup route scope and limits: [Windows walkthrough](docs/windows-backup.md).

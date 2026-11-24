@@ -1,10 +1,10 @@
 # Walkthrough: read, back up, and move saved notes
 
-Start with [START HERE](../START%20HERE.md). Use existing exports only. If you have no ENEX files, stop: opening Evernote or exporting has not been verified to preserve last-viewed dates. See the [evidence and boundary](source-safety.md).
+Start with [START HERE](../START%20HERE.md). Use existing ENEX files or the [Windows backup walkthrough](windows-backup.md) to create ENEX from an isolated cache copy. That new route has explicit compatibility and completeness limits. Do not open Evernote to export under the strict no-changes requirement.
 
 ## Start on Windows
 
-Download the ZIP from the [release page](https://github.com/mkant18/evernote-exporter/releases/tag/v0.2.1), extract all files, and install [Node.js 22 or later](https://nodejs.org/en/download). Double-click **Start Evernote Archive.cmd**. First launch downloads pinned dependencies; later launches can run without internet. No Evernote login is requested. The app requires no administrator rights.
+Download the ZIP from the [release page](https://github.com/mkant18/evernote-exporter/releases/tag/v0.3.0), extract all files, and install [Node.js 22.13 or later](https://nodejs.org/en/download). Double-click **Start Evernote Archive.cmd**. First launch downloads pinned dependencies; later launches can run without internet. No Evernote login is requested. The app requires no administrator rights.
 
 Keep the extracted folder: your library lives in `archives/app` inside it. Closing the browser leaves the app running. The launcher shows its process ID and stop command. Reopening it reuses that session; restarting the PC stops it. For a visible terminal, run `npm start` and stop with Ctrl+C.
 
@@ -38,13 +38,13 @@ For a whole-library backup, stop every archive app session and copy `archives/ap
 2. Choose **File → Import → ENEX** and select the copied file. Joplin creates a new notebook. Choose its HTML import option if preserving rich formatting matters more than Markdown editing.
 3. Check note count, tags, titles, dates, attachments, tables, checklists, and internal links. Formatting and OCR behavior can differ; note links may be guessed by title or remain Evernote links. Do not click remaining Evernote links under the no-changes requirement.
 4. If acceptable, import the remaining copied ENEX files. Track split notebook parts and recreate stack organization in Joplin as needed. Keep original ENEX and archive backups even after migration.
-5. Set up destination-only mobile sync separately if desired. Do not delete or reorganize the original Evernote account.
+5. For use across Windows, iPhone and iPad, install [Joplin on each device](https://joplinapp.org/help/install/). Import on one Windows device first, then configure the same [Joplin sync destination](https://joplinapp.org/help/apps/sync/) on the others. Joplin supports providers including OneDrive, Dropbox and Joplin Cloud; choose one you trust. Let the initial sync finish and check representative notes and attachments on every device. Do not re-import every ENEX on each device, which could create duplicates. Do not delete or reorganize the original Evernote account.
 
 These steps follow [Joplin's import documentation](https://joplinapp.org/help/apps/import_export/); this release has not been tested against a live Joplin installation or your mother's account. Migration acceptance requires inspecting the copied data. Importing back into the source Evernote account would change it and is excluded.
 
 ## Read on your iPhone
 
-Double-click **Start on iPhone.cmd** on the PC, then choose **Use on iPhone** in the app. Open its private link in Safari. Both devices must be on the same trusted Wi-Fi, and the PC must remain awake. This is a local archive link, not the Evernote iPhone app.
+These steps also apply to an iPad or another Windows browser. Double-click **Start on iPhone.cmd** on the PC, then choose **Use on iPhone** in the app. Open its private link in Safari. Both devices must be on the same trusted Wi-Fi, and the PC must remain awake. This is a local archive link, not the Evernote iPhone app.
 
 If Windows requests network access, allow only the private network you intend to use. The app does not change firewall rules. If connection fails, check Wi-Fi, PC sleep, VPNs, and router client isolation. Sharing uses HTTP and a private key; anyone with the link and network access can read the library. Do not use public/shared Wi-Fi or publish the link. A new process normally generates a new key.
 

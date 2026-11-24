@@ -1,13 +1,13 @@
 {
   "name": "evernote-exporter",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "Export Evernote data to a portable neutral format for migration to any notes system",
   "main": "src/index.js",
   "bin": {
     "evernote-exporter": "src/cli.js"
   },
   "engines": {
-    "node": ">=22"
+    "node": ">=22.13"
   },
   "scripts": {
     "test": "node --test",
@@ -21,16 +21,20 @@
     "scripts",
     "Start Evernote Archive.cmd",
     "Start on iPhone.cmd",
+    "Backup Windows Evernote.cmd",
+    "Export Windows Backup.cmd",
     "README.md",
     "docs/user-guide.md",
     "docs/archive-format.md",
     "START HERE.md",
-    "docs/source-safety.md"
+    "docs/source-safety.md",
+    "docs/windows-backup.md"
   ],
   "license": "MIT",
   "dependencies": {
     "entities": "6.0.1",
     "saxes": "6.0.0",
-    "yazl": "3.3.1"
+    "yazl": "3.3.1",
+    "yjs": "13.6.31"
   }
 }
